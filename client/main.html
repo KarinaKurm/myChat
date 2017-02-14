@@ -1,0 +1,121 @@
+<head>
+  <title>My Simple Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+   
+ </body>
+
+
+<template name="main">
+
+    <h1>Int'l Student App</h1>
+    {{> navigation}}
+     {{> yield}}
+    <hr />
+    <p>Copyright &copy; Karina Kurmanbayeva, 2017.</p>
+</template>
+
+<template name="home">
+  <h1>This is the home page</h1>
+
+</template>
+<template name="chatPage">
+  <!-- <h1>This is the home page</h1> -->
+  {{#if currentUser}}
+  {{> chat}}
+   {{else}}
+   <h1>You have no permition</h1>
+{{/if}}
+</template>
+
+<template name= "profileSetUp">
+  
+  <h1>Lets set up your profile</h1>
+
+  <h2>Login</h2>
+    <form class="login">
+        <p>Homecounty: <input type="homecounty" name="homecounty"></p>
+        <p>Language: <input type="language" name="language"></p>
+        <p><input type="submit" value="Login"></p>
+    </form>
+
+</template>
+
+<template name="navigation">
+<ul>
+       
+       <li><a href="/">Home</a></li> 
+    {{#if currentUser}}
+      <li><a href="{{pathFor route='chatPage'}}">Chat Page</a></li>
+        <li><a href="#" class="logout">Logout</a></li>
+    {{else}}
+        <li><a href="{{pathFor route='register'}}">Register</a></li>
+        <li><a href="{{pathFor route='login'}}">Login</a></li>
+
+    {{/if}}
+    </ul>
+</template>
+
+<template name="login">
+    <h2>Login</h2>
+    <form class="login">
+        <p>Email: <input type="email" name="email"></p>
+        <p>Password: <input type="password" name="password"></p>
+        <p><input type="submit" value="Login"></p>
+    </form>
+</template>
+
+<template name="register">
+    <h2>Register</h2>
+    <form class="register">
+        <p>Email: <input type="email" name="email"></p>
+        <p>Password: <input type="password" name="password"></p>
+        <p><input type="submit" value="Register"></p>
+    </form>
+</template>
+
+
+
+ <template name="chat">
+  
+    <div class="container">
+     <div class="row">
+       <h3 class="text-center" >SIMPLE METEOR CHAT</h3>
+      <h5 class="text-center text-muted">Sign in to join!</h5>
+       <div class="col-md-12">
+    
+         <div class="panel panel-info">
+           <div class="panel-heading">
+             GROUP CHAT
+           </div>
+           <div class="panel-body">
+             <ul class="media-list">
+               <!-- message template -->
+               {{#each messages}}
+                 {{> message}}
+               {{/each}}
+             </ul>
+           </div>
+           <!-- message textbox -->
+           {{#if currentUser}}
+
+           <form class="new-message">
+             <div class="panel-footer">
+               <div class="input-group">
+                 <input type="text" name="text" class="form-control" placeholder="Enter Message" />
+                 <span class="input-group-btn">
+                   <button class="btn btn-info send" type="submit">SEND</button>
+                 </span>
+               </div>
+             </div>
+           </form>
+
+           {{/if}}
+         </div>
+       </div>
+     </div>
+   </div>
+</template>
+
